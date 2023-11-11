@@ -55,3 +55,7 @@ chr12	41806259	41946923	rs2730819	1.0	chr12	41907597	41908097
 chr12	41806259	41946923	rs2730819	1.0	chr12	41908226	41908726
 chr12	41806259	41946923	rs2730819	1.0	chr12	41906946	41907446
 ```
+- Questions
+	- 1. Reference LD SNPs, R square cutoff
+	- 2. SNPs filter: p value cutoff 
+	- 3. Overlap filter: -f 1.0 or not
