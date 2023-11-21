@@ -34,36 +34,20 @@ def main():
 
         # convert a row as a single string
         row_string='\t'.join([str(i) for i in row])
-        # print(row_string)
+
         try:       
-            # print(row[2])   
-            # print(row)  
             ld_snps=ld_data.query(row[0],row[1],row[2])
-            # print(row[0])
-            # print(ld_snps)
             #get the min and max position of the overlap
             ld_snps=[i for i in ld_snps]
-            # print(ld_snps[1])
-            # print(ld_snps[2])
             
-            # print(ld_snps[0][0])
-            # print(ld_snps[0][1])
-            # print(ld_snps[1][0])
-            # print(ld_snps[2][0])
-            # print(ld_snps[3][0])
-            # print(ld_snps[-1][0])
-            # print(ld_snps[0][1])
-            # print(len(ld_snps))
-            # print(ld_snps[:10])
             if len(ld_snps)==0:
-                # print(len(ld_snps))
                 #nothing in ld found, just use the original snp entry 
-                # print('\t'.join([str(i) for i in row[0:3]])+'\t'+row_string+'\n')
                 outf.write('\t'.join([str(i) for i in row[0:3]])+'\t'+row_string+'\n')
             else:
                 min_pos=ld_snps[0][5]
-                print(min_pos)
+                # print(ld_snps[-1][5])
                 max_pos=ld_snps[-1][5]
+                print(min_pos,max_pos)
                 if min_pos>=max_pos:
                     outf.write('\t'.join([str(i) for i in row[0:3]])+'\t'+row_string+'\n')
                     continue 

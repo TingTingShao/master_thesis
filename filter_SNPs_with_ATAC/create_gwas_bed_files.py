@@ -21,6 +21,14 @@ def main():
     gwas['snp_pos']=gwas['Position']
     gwas['rsid']=gwas['MarkerName']
     gwas['pvalue']=gwas['Pvalue']
+    # gwas=pd.read_csv(args.gwas,header=0,delim_whitespace=True,dtype={'chromosome':'str'})
+    # if args.append is True: 
+    #     gwas['Chromosome']='chr'+gwas['chromosome']
+    # gwas['start_pos']=gwas['base_pair_location']-1
+    # gwas['snp_pos']=gwas['base_pair_location']
+    # gwas['rsid']=gwas['variant_id']
+    # gwas['pvalue']=gwas['p_value']
+
     print("loaded gwas!")
     #gwas['logp']=np.log10(gwas['pvalue'])
     subset=gwas[['Chromosome','start_pos','snp_pos','rsid','pvalue']]
