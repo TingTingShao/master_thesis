@@ -55,7 +55,38 @@ chr12	41806259	41946923	rs2730819	1.0	chr12	41907597	41908097
 chr12	41806259	41946923	rs2730819	1.0	chr12	41908226	41908726
 chr12	41806259	41946923	rs2730819	1.0	chr12	41906946	41907446
 ```
+
 - Questions
 	- 1. Reference LD SNPs, R square cutoff
 	- 2. SNPs filter: p value cutoff 
 	- 3. Overlap filter: -f 1.0 or not
+
+- Update
+	- After setting LD association cutoff as 0.2, with expansion or without expansion, the results are the same after mapping with the peaks file (Temporarily used their final results peakGeneLinks, SupplementalTables.combined.xlsx)
+	- potential reasons:
+		- [x] the index of the filtered LD file is not correct
+			- Run files with original LD file 
+				- [ ] there are records where starting pos is bigger than end pos 
+				- temporary solution: exclude the not validate records 
+
+```bash
+# issue: records where starting pos is bigger than end pos after expansion
+❯ awk '$2 < $3 {print $2, $3, $7}' Kunkle_0.1.expanded.adj.bed | wc -l
+ 1278245
+❯ awk '$2 > $3 {print $2, $3, $7}' Kunkle_0.1.expanded.adj.bed | wc -l
+2394
+❯ awk '$2 > $3 {print $2, $3, $7}' Bellenguez_1e-1.expanded.bed | wc -l
+570
+
+# temporary solution: exclude 2349 reocords
+
+❯ awk '{print $1,$2,$3,$4}' Kunkle_0.1.expanded.adj.long.filtered.bed | sort -u | wc -l
+  336508  # 11374(no expansion) -> 336508
+
+❯ awk '{print $1,$2,$3,$4}' Bellenguez_1e-1.adj.expanded.long.filtered.bed | sort -u | wc -l
+   31642  # 23628(no expansion) -> 31642
+❯ awk '{print $1,$2,$3,$4}' Kunkle.Bellenguez.selected.expansion.adj.snps.bed | sort -u | wc -l
+  336508 # 34994 (no expansion) -> 336508
+  
+```
+
